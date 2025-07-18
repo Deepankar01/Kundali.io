@@ -60,6 +60,8 @@ def generate_rasi_chart(
     for name, pid in planet_ids.items():
         if name == "Ketu":
             continue  # we'll handle later
+        # swe.calc_ut returns a tuple where the first element is another tuple
+        # containing the longitude as its first value.
         lon = swe.calc_ut(jd_ut, pid)[0][0]
         grahas[name] = {"degree": lon % 30, "sign": signs[int(lon // 30)]}
 
@@ -69,6 +71,9 @@ def generate_rasi_chart(
     grahas["Ketu"] = {"degree": ketu_lon % 30, "sign": signs[int(ketu_lon // 30)]}
 
     # Calculate Ascendant and house cusps
+    # swe.houses_ex returns two tuples: cusps and additional points (ascmc)
+    # The previous code tried to unpack four values which caused a ValueError.
+    # Correctly unpack the returned cusps and ascmc values.
     houses, ascmc = swe.houses_ex(jd_ut, latitude, longitude, b"A", swe.FLG_SIDEREAL)
     asc_deg = ascmc[0]  # Ascendant degree
     asc_sign = signs[int(asc_deg // 30)]
