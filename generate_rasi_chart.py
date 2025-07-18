@@ -60,7 +60,7 @@ def generate_rasi_chart(
     for name, pid in planet_ids.items():
         if name == "Ketu":
             continue  # we'll handle later
-        lon, _ = swe.calc_ut(jd_ut, pid)[0:2]
+        lon = swe.calc_ut(jd_ut, pid)[0][0]
         grahas[name] = {"degree": lon % 30, "sign": signs[int(lon // 30)]}
 
     # Calculate Ketu
@@ -69,7 +69,7 @@ def generate_rasi_chart(
     grahas["Ketu"] = {"degree": ketu_lon % 30, "sign": signs[int(ketu_lon // 30)]}
 
     # Calculate Ascendant and house cusps
-    _, ascmc, houses, _ = swe.houses_ex(jd_ut, latitude, longitude, b"A", flag=swe.FLG_SIDEREAL)
+    houses, ascmc = swe.houses_ex(jd_ut, latitude, longitude, b"A", swe.FLG_SIDEREAL)
     asc_deg = ascmc[0]  # Ascendant degree
     asc_sign = signs[int(asc_deg // 30)]
 
