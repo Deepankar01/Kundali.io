@@ -25,9 +25,19 @@ def calculate_saptavargaja_bala(chart):
             varga_signs = calculate_varga_chart(chart, division, rules)
 
         for graha, sign in varga_signs.items():
+            # ``calculate_varga_chart`` returns a dictionary containing both the
+            # division number and the sign, while the ``same_as_sign`` path
+            # above yields just the sign string.  ``get_dignity`` expects only
+            # the sign name, so handle both cases here.
+            if isinstance(sign, dict):
+                sign_name = sign.get("sign")
+            else:
+                sign_name = sign
+
             if graha not in dignity_table:
                 dignity_table[graha] = []
-            dignity = get_dignity(graha, sign)
+
+            dignity = get_dignity(graha, sign_name)
             dignity_table[graha].append(dignity_scores.get(dignity, 0))
 
     saptavarga_bala = {g: {
