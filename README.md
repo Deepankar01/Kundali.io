@@ -38,3 +38,14 @@ Demistifying the indian birth chart predictions through code
 | 🌀 Add Pratyantar/Antar-antar dasha     | ⭐⭐       | Optional for finer analysis        |
 | 🗃 Integrate *Chalit* or Bhava charts   | ⭐        | Depends on house cusp system       |
 | 📑 Generate BPHS-style report           | ⭐⭐       | With references to chapters/slokas |
+
+
+
+Here’s your finalized Shadbala (Sixfold Strength) table for each planet, based on full BPHS logic:
+
+🧱 Sthana: Positional and varga strength
+🧭 Dig: Directional
+🕒 Kala: Time-based (diurnal + Paksha)
+🔁 Cheshta: Motion
+♾ Naisargika: Natural
+🔭 Drik: Aspect-based
