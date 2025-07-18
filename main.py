@@ -1,4 +1,4 @@
-from bhav.lagana import interpret_lagna_bhava
+from bhav.combined import interpret_all_bhavas
 from bhav.summary import generate_bhava_summary
 from chara_karakas import get_chara_karakas
 from generate_rasi_chart import generate_rasi_chart
@@ -21,7 +21,12 @@ from divisional_rules import BPHS_DIVISIONAL_RULES
 from plotting.plot_north_style import draw_north_indian_chart
 from yoga2.detect_yogas_with_auto_shadbala import detect_yogas_with_auto_shadbala
 
-chart = generate_rasi_chart("1990-05-15", "14:30", 28.6139, 77.2090)
+DOB = "1990-05-15"
+TOB = "14:30"
+LAT = 28.6139
+LONG = 77.2090
+
+chart = generate_rasi_chart(DOB, TOB, LAT, LONG)
 print(chart)
 yogas = detect_yogas(chart)
 print("-----------")
@@ -54,30 +59,28 @@ print(sthan_bala_with_saptavargaja_bala)
 
 dig_bala = calculate_dig_bala(chart)
 print(dig_bala)
-kala_bala = calculate_kala_bala(chart, "1990-05-15", "14:30", 28.6139, 77.2090)
+kala_bala = calculate_kala_bala(chart, DOB, TOB, LAT, LONG)
 print(kala_bala)
-cheshta_bala = calculate_cheshta_bala(chart, "1990-05-15", "14:30", 28.6139, 77.2090)
+cheshta_bala = calculate_cheshta_bala(chart, DOB, TOB, LAT, LONG)
 print(cheshta_bala)
 naisargika_bala = calculate_naisargika_bala()
 print(naisargika_bala)
 drik_bala = calculate_drik_bala(chart)
 print(drik_bala)
 
-shadbala = calculate_shadbala(chart, "1990-05-15", "14:30", 28.6139, 77.2090)
+shadbala = calculate_shadbala(chart, DOB, TOB, LAT, LONG)
 print(shadbala)
 categorized_shadbala = categorize_shadbala_strength(shadbala)
 print(categorized_shadbala)
 
 # Run it on current chart and Shadbala
 # shadbala_from_production = {graha: int(v['TotalVirupas']) for graha, v in shadbala.items()}
-decorated_yoga_results = detect_yogas_with_auto_shadbala(chart, "1990-05-15", "14:30", 28.6139, 77.2090)
+decorated_yoga_results = detect_yogas_with_auto_shadbala(chart, DOB, TOB, LAT, LONG)
 print(decorated_yoga_results)
 
 bhava_summary = generate_bhava_summary(chart)
 print(bhava_summary)
 
-# Run interpretation for Lagna Bhava
-lagna_analysis = interpret_lagna_bhava(chart, categorized_shadbala)
-print(lagna_analysis)
-
+result = interpret_all_bhavas(chart, categorized_shadbala)
+print(result)
 fig = draw_north_indian_chart(chart)
